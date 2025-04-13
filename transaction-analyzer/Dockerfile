@@ -7,4 +7,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+ENV GOOGLE_APPLICATION_CREDENTIALS="/app/virtualbox-assignmnt-6d2f47e5141c.json"
+
 CMD ["uvicorn", "transaction_analyzer:app", "--host", "0.0.0.0", "--port", "8000"]

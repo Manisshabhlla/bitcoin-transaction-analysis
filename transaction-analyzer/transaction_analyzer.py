@@ -2,10 +2,14 @@ from fastapi import FastAPI
 from google.cloud import bigquery
 
 app = FastAPI()
-client = bigquery.Client()
+
+@app.get("/")
+def health_check():
+    return {"status": "Transaction Analyzer API is running!"}
 
 @app.get("/top-transactions")
 def get_top_transactions():
+    client = bigquery.Client()
     query = """
     SELECT sender, receiver, SUM(amount) as total_amount
     FROM `virtualbox-assignmnt.bitcoin_analysis.transactions`
